@@ -11,7 +11,7 @@ import (
 	"regexp"
 )
 
-func getHoroscope(sign string) {
+func getHoroscope(sign string) string {
 	re := regexp.MustCompile(`horoscope\s=?\s(.*)?;`)
 	response, err := http.Get("http://astrology.kudosmedia.net/index.php/m/" + sign + "?day=today")
 
@@ -21,14 +21,16 @@ func getHoroscope(sign string) {
 		data, _ := ioutil.ReadAll(response.Body)
 		horoscope := re.FindStringSubmatch(string(data))[1]
 		fmt.Printf("%s\n", horoscope)
+		return horoscope
 	}
 
 }
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	res := getHoroscope("aquarius")
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       "hello world",
+		Body:       res,
 	}, nil
 }
 
