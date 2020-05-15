@@ -12,6 +12,7 @@ import (
 )
 
 func getHoroscope(sign string) string {
+	var horoscope = ""
 	re := regexp.MustCompile(`horoscope\s=?\s(.*)?;`)
 	response, err := http.Get("http://astrology.kudosmedia.net/index.php/m/" + sign + "?day=today")
 
@@ -19,11 +20,10 @@ func getHoroscope(sign string) string {
 		fmt.Printf("The request failed, error: %s\n", err)
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
-		horoscope := re.FindStringSubmatch(string(data))[1]
+		horoscope = re.FindStringSubmatch(string(data))[1]
 		fmt.Printf("%s\n", horoscope)
-		return horoscope
 	}
-
+	return horoscope
 }
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
