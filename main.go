@@ -25,8 +25,8 @@ func getHoroscope(sign string) {
 
 }
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return events.APIGatewayResponse{
+func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       "hello world",
 	}, nil
