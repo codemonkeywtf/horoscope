@@ -28,10 +28,10 @@ func getHoroscope(sign string) string {
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	res := getHoroscope(request.QueryStringParameters["sign"])
-	horoscope, _ := json.Marshal(res)
+	// horoscope := &res
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       string(horoscope),
+		Body:       json.Marshal(res),
 	}, nil
 }
 
