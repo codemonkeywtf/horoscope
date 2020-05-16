@@ -21,7 +21,7 @@ func getHoroscope(sign string) string {
 		fmt.Printf("The request failed, error: %s\n", err)
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
-		horoscope = re.FindStringSubmatch(data)[1]
+		horoscope = re.FindStringSubmatch(string(data))[1]
 	}
 	return horoscope
 }
@@ -31,7 +31,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	// horoscope := &res
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       string(res),
+		Body:       res,
 	}, nil
 }
 
