@@ -27,7 +27,7 @@ func getHoroscope(sign string) string {
 }
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	res := getHoroscope(request.QueryStringParameters.sign)
+	res := getHoroscope(request.QueryStringParameters["sign"])
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       res,
