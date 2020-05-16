@@ -31,7 +31,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	horoscope, _ := json.Marshal(res)
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       horoscope,
+		Body:       string(horoscope),
 	}, nil
 }
 
