@@ -15,7 +15,7 @@ func getHoroscope(sign string) string {
 	response, err := http.Get("http://astrology.kudosmedia.net/index.php/m/" + sign + "?day=today")
 
 	if err != nil {
-		return "The request failed, error: " + err
+		return string("The request failed, error: " + err)
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 		horoscope = re.FindStringSubmatch(string(data))[1]
