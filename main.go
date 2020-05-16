@@ -1,10 +1,7 @@
 package main
 
 import (
-	//	"bytes"
 	"context"
-	// "encoding/json"
-	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"io/ioutil"
@@ -18,7 +15,7 @@ func getHoroscope(sign string) string {
 	response, err := http.Get("http://astrology.kudosmedia.net/index.php/m/" + sign + "?day=today")
 
 	if err != nil {
-		fmt.Printf("The request failed, error: %s\n", err)
+		return "The request failed, error: " + err
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 		horoscope = re.FindStringSubmatch(string(data))[1]
@@ -28,7 +25,6 @@ func getHoroscope(sign string) string {
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	res := getHoroscope(request.QueryStringParameters["sign"])
-	// horoscope := &res
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       res,
