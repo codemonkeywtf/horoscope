@@ -3,7 +3,7 @@ package main
 import (
 	//	"bytes"
 	"context"
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -21,7 +21,7 @@ func getHoroscope(sign string) string {
 		fmt.Printf("The request failed, error: %s\n", err)
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
-		horoscope = re.FindStringSubmatch(string(data))[1]
+		horoscope = re.FindStringSubmatch(data)[1]
 	}
 	return horoscope
 }
