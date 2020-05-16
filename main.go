@@ -34,5 +34,4 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 
 func main() {
 	lambda.Start(handler)
-
 }
