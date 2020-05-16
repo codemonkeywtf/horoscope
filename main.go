@@ -3,6 +3,7 @@ package main
 import (
 	//	"bytes"
 	// 	"encoding/json"
+	"context"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -21,7 +22,6 @@ func getHoroscope(sign string) string {
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 		horoscope = re.FindStringSubmatch(string(data))[1]
-		fmt.Printf("%s\n", horoscope)
 	}
 	return horoscope
 }
