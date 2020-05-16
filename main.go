@@ -2,8 +2,8 @@ package main
 
 import (
 	//	"bytes"
-	// 	"encoding/json"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -28,9 +28,10 @@ func getHoroscope(sign string) string {
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	res := getHoroscope(request.QueryStringParameters["sign"])
+	horoscope, _ := json.Marshal(res)
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       res,
+		Body:       horoscope,
 	}, nil
 }
 
